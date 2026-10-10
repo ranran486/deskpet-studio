@@ -1,0 +1,30 @@
+const {_electron}=require('playwright'),fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+process.chdir(path.resolve(__dirname,'..'));
+(async()=>{
+  const data=path.resolve(`.runtime/dialogue-editor-qa-${Date.now()}`);fs.mkdirSync(data,{recursive:true});
+  fs.writeFileSync(path.join(data,'config.json'),JSON.stringify({skin:'builtin.blue-maid',disabled:['builtin.cat-actions','builtin.pomodoro-js'],interaction:{wander:false,look:false,avoid:false,hourlyChime:false,fullscreenQuiet:false,petCooldownMs:0}}));
+  const file=path.join(data,'dialogue.zh-CN.json');fs.writeFileSync(file,JSON.stringify({version:1,style:'自定义',groups:{rub:['旧用户文案'],hang:['保留的旧倒挂文案']}}));
+  const env={...process.env};delete env.ELECTRON_RUN_AS_NODE;
+  const exe=process.argv[2]?path.resolve(process.argv[2]):path.resolve('node_modules/electron/dist/electron.exe'),args=process.argv[2]?[]:[path.resolve('.')];args.push(`--data-dir=${data}`,'--no-sandbox');
+  const app=await _electron.launch({executablePath:exe,args,env}),checks=[],errors=[];
+  try {
+    const page=await app.firstWindow();page.on('pageerror',e=>errors.push(e.message));await page.waitForFunction(()=>document.querySelector('#pet')?.dataset.body==='idle');
+    const command=name=>page.evaluate(name=>window.deskpet.invokePlugin({kind:'command',pluginId:'builtin',name}),name);
+    const opened=app.waitForEvent('window');await command('settings');const settings=await opened;settings.on('pageerror',e=>errors.push(e.message));
+    await settings.locator('button[data-tab="dialogue"]').click();await settings.locator('#dialogue-category option').first().waitFor({state:'attached'});
+    const select=async(category,group)=>{await settings.locator('#dialogue-category').selectOption(category);await settings.locator('#dialogue-group').selectOption(group);};
+    await select('interaction','rub');assert.equal(await settings.locator('#dialogue-lines').inputValue(),'旧用户文案');checks.push('new-settings-tab-preserves-existing-text');
+    await settings.locator('#dialogue-lines').fill('给{name}摸摸头～');await settings.locator('#dialogue-preview').click();await settings.waitForFunction(()=>document.querySelector('#dialogue-sample').textContent==='给蓝鲸摸摸头～');assert.equal(JSON.parse(fs.readFileSync(file)).groups.rub[0],'旧用户文案');checks.push('draft-preview-substitutes-name-without-saving');
+    await settings.locator('#dialogue-save').click();await settings.waitForFunction(()=>document.querySelector('#dialogue-status').textContent.includes('立即生效'));
+    await page.evaluate(()=>window.deskpet.petInteract('rub'));await page.waitForFunction(()=>document.querySelector('#bubble-text').textContent==='给蓝鲸摸摸头～');checks.push('save-hot-updates-real-interaction');
+    await select('action','hang');await settings.locator('#dialogue-lines').fill('{name}挂在上面看着你！');await select('action','walk');await settings.locator('#dialogue-lines').fill('{name}走起来啦！');await select('action','hang');assert.equal(await settings.locator('#dialogue-lines').inputValue(),'{name}挂在上面看着你！');checks.push('switching-groups-preserves-drafts');
+    await settings.locator('#dialogue-save-all').click();await settings.waitForFunction(()=>document.querySelector('#dialogue-status').textContent.includes('立即生效'));
+    await command('pose-walk');await page.waitForFunction(()=>document.querySelector('#bubble-text').textContent==='蓝鲸走起来啦！');await command('dock-top');await page.waitForFunction(()=>document.querySelector('#bubble-text').textContent==='蓝鲸挂在上面看着你！');checks.push('batch-save-drives-action-and-posture-dialogue');
+    await command('wake');await page.evaluate(()=>window.deskpet.setSkin('builtin.cat-default'));await page.waitForFunction(()=>document.querySelector('#pet').dataset.body==='idle');await command('pose-walk');await page.waitForFunction(()=>document.querySelector('#bubble-text').textContent==='小橘走起来啦！');checks.push('different-character-inherits-shared-lines');
+    const invalid=await settings.evaluate(()=>window.deskpet.saveDialogue({rub:[],hang:['不应该保存']}));assert.equal(invalid.ok,false);assert.equal(JSON.parse(fs.readFileSync(file)).groups.hang[0],'{name}挂在上面看着你！');checks.push('invalid-batch-rejected-without-partial-write');
+    await select('action','walk');await settings.locator('#dialogue-default').click();assert.equal(JSON.parse(fs.readFileSync(file)).groups.walk[0],'{name}走起来啦！');await settings.locator('#dialogue-save').click();await settings.waitForFunction(()=>document.querySelector('#dialogue-status').textContent.includes('立即生效'));assert.deepEqual(JSON.parse(fs.readFileSync(file)).groups.walk,JSON.parse(fs.readFileSync('assets/dialogue.zh-CN.json')).groups.walk);assert.equal(JSON.parse(fs.readFileSync(file)).groups.rub[0],'给{name}摸摸头～');checks.push('restore-current-default-keeps-other-groups');
+    await select('interaction','rub');const image=await app.evaluate(async({BrowserWindow})=>(await BrowserWindow.getAllWindows().find(w=>w.getTitle().includes('设置')).webContents.capturePage()).toPNG().toString('base64'));fs.writeFileSync('.runtime/dialogue-settings.png',Buffer.from(image,'base64'));
+    await settings.close();const reopened=app.waitForEvent('window');await command('settings');const again=await reopened;await again.locator('button[data-tab="dialogue"]').click();await again.locator('#dialogue-category option').first().waitFor({state:'attached'});await again.locator('#dialogue-category').selectOption('interaction');await again.locator('#dialogue-group').selectOption('rub');assert.equal(await again.locator('#dialogue-lines').inputValue(),'给{name}摸摸头～');checks.push('reopen-settings-retains-saved-language');await again.close();
+    assert.deepEqual(errors,[]);checks.push('no-renderer-errors');fs.writeFileSync('.runtime/dialogue-editor-qa-report.json',JSON.stringify({generatedAt:new Date().toISOString(),passed:true,exe,checks,errors},null,2));console.log(`${checks.length} dialogue editor UI checks passed`);
+  }finally{await app.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

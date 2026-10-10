@@ -1,0 +1,48 @@
+{
+  "name": "deskpet",
+  "version": "0.2.3",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "type": "module",
+  "description": "Plugin-based desktop pet framework: transparent always-on-top window, custom skins and animations, text chat, plugin system.",
+  "main": "dist/main/index.js",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "setup": "npm ci && npm run setup:runtime",
+    "setup:runtime": "node tools/setup-runtime.mjs",
+    "start": "npm run build && node tools/launch.mjs",
+    "selfcheck": "npm run build && npm run setup:runtime && node tools/launch.mjs --selfcheck --data-dir=.runtime/selfcheck-userdata",
+    "test": "npm run build && node tools/run-node-tests.mjs",
+    "test:ui": "npm run build && npm run setup:runtime && node tools/selftest-live-ui.cjs",
+    "assets:maid": "npm run build && node tools/pack-blue-maid.mjs && node tools/pack-blue-maid-actions.mjs && node tools/pack-blue-maid-expressions.mjs && node tools/attach-builtin-action-profiles.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "setup:live2d": "node tools/setup-live2d.mjs",
+    "test:live2d": "npm run build && npm run setup:runtime && node tools/selftest-live2d-ui.cjs",
+    "dist:beta": "npm run template:actions && npm run setup:runtime && node tools/package-beta.mjs",
+    "dist:beta:dir": "npm run template:actions && npm run setup:runtime && node tools/package-beta.mjs --dir",
+    "test:package": "node tools/selftest-package.cjs",
+    "test:gameplay": "npm run build && npm run setup:runtime && node tools/selftest-pet-play-ui.cjs",
+    "template:actions": "npm run build",
+    "template:bind": "npm run build && node tools/create-action-profile.mjs",
+    "source:export": "node tools/export-source.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "electron": "44.7.0",
+    "electron-builder": "26.15.3",
+    "playwright": "1.62.1",
+    "pngjs": "7.0.0",
+    "typescript": "5.9.3"
+  },
+  "overrides": {
+    "@electron/get": "5.1.0"
+  },
+  "dependencies": {
+    "@pixi/unsafe-eval": "6.5.10",
+    "ag-psd": "31.0.3",
+    "pixi.js": "6.5.10"
+  }
+}

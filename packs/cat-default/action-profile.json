@@ -1,0 +1,10 @@
+{
+  "version": "deskpet-character-actions/1",
+  "kind": "sprite",
+  "states": {
+    "idle": "idle",
+    "happy": "happy",
+    "talk": "talk",
+    "wave": "wave"
+  }
+}

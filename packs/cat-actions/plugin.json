@@ -1,0 +1,82 @@
+{
+  "manifestVersion": 1,
+  "id": "builtin.cat-actions",
+  "name": "猫猫小动作 · 声明式动作包",
+  "version": "0.1.0",
+  "description": "兼容猫咪的 talk/purr 状态与喝水、晚安提醒；摸头、空闲问候由统一本地互动服务处理。",
+  "author": "deskpet",
+  "kind": "action",
+  "runtime": "declarative",
+  "engine": {
+    "deskpet": ">=0.1.0 <1.0.0"
+  },
+  "permissions": [
+    "pet:speak",
+    "pet:react",
+    "pet:state",
+    "timer",
+    "notify"
+  ],
+  "configSchema": {
+    "goodnightAt": {
+      "type": "text",
+      "label": "晚安提醒时间",
+      "default": "23:30",
+      "description": "HH:mm，24 小时制"
+    }
+  },
+  "data": {
+    "states": "states.json"
+  },
+  "triggers": [
+    {
+      "id": "timer-water",
+      "when": {
+        "on": "timer",
+        "everyMinutes": 30
+      },
+      "actions": [
+        {
+          "type": "notify",
+          "title": "喝水提醒",
+          "body": "该喝口水啦，别一直盯着屏幕。"
+        },
+        {
+          "type": "pet.react",
+          "reaction": "happy"
+        },
+        {
+          "type": "pet.speak",
+          "message": "该喝水啦！",
+          "durationMs": 5000
+        }
+      ]
+    },
+    {
+      "id": "night-goodnight",
+      "when": {
+        "on": "timer",
+        "at": {
+          "config": "goodnightAt"
+        }
+      },
+      "actions": [
+        {
+          "type": "pet.setState",
+          "state": "sleep"
+        },
+        {
+          "type": "pet.speak",
+          "message": "该睡觉啦，明天见。",
+          "durationMs": 6000
+        }
+      ]
+    }
+  ],
+  "provides": {
+    "states": [
+      "talk",
+      "purr"
+    ]
+  }
+}

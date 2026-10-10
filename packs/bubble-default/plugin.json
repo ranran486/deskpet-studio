@@ -1,0 +1,16 @@
+{
+  "manifestVersion": 1,
+  "id": "builtin.bubble-default",
+  "name": "默认气泡主题",
+  "version": "0.1.0",
+  "description": "内置默认主题：暖白气泡 + 橘色强调色，正好配 cat-default 的毛色。纯数据包，只贡献一组 ThemeTokens。",
+  "author": "deskpet",
+  "kind": "theme",
+  "runtime": "data",
+  "engine": {
+    "deskpet": ">=0.1.0 <1.0.0"
+  },
+  "data": {
+    "tokens": "tokens.json"
+  }
+}

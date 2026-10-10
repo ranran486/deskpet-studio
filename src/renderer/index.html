@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src deskpet: 'wasm-unsafe-eval'; style-src 'unsafe-inline' deskpet:; img-src deskpet: data:; connect-src deskpet:; font-src deskpet:"
+    />
+    <title>DeskPet</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="stage">
+      <div id="bubble" class="hidden" aria-live="polite">
+        <button id="bubble-close" type="button" aria-label="关闭气泡">×</button>
+        <div id="bubble-text"></div>
+        <div id="bubble-chips" class="chips hidden"></div>
+        <div id="bubble-input-row" class="hidden">
+          <input id="chat-input" type="text" autocomplete="off" placeholder="说点什么…（Enter 发送，Esc 关闭）" />
+        </div>
+        <div id="bubble-hint"></div>
+      </div>
+      <canvas id="pet" width="128" height="128"></canvas>
+      <div id="pet-effects" aria-hidden="true"></div>
+      <div id="pose-ledge" class="hidden" aria-hidden="true"></div>
+      <section id="feed-panel" class="hidden" aria-label="喂食面板">
+        <button id="feed-close" type="button" aria-label="关闭喂食">×</button>
+        <strong>给我挑个点心嘛</strong>
+        <div id="mood-score">心情 65/100</div>
+        <div class="mood-meter"><div id="mood-fill"></div></div>
+        <div id="food-options"></div>
+        <p id="feed-note">选一份点心，看看它的小表情。</p>
+      </section>
+    </div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

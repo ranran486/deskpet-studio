@@ -1,0 +1,195 @@
+/* 主题令牌由主题插件注入到 :root 上（见 main.ts 的 applyTheme） */
+:root {
+  --bubble-bg: rgba(28, 30, 38, 0.94);
+  --bubble-color: #f2f4f8;
+  --bubble-radius: 14px;
+  --bubble-font: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+  --bubble-size: 14px;
+  --bubble-max-width: 280px;
+  --bubble-shadow: 0 8px 26px rgba(0, 0, 0, 0.34);
+  --accent: #6ea8ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  user-select: none;
+  cursor: default;
+  font-family: var(--bubble-font);
+}
+
+#stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* 宠物锚在底部居中：几何位置必须与 main.ts 里的 canvas 布局保持一致 */
+#pet {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  image-rendering: auto;
+  cursor: grab;
+  -webkit-user-drag: none;
+}
+
+#pet.dragging {
+  cursor: grabbing;
+}
+
+#feed-panel { position: absolute; z-index: 12; width: 268px; max-width: calc(100vw - 16px); padding: 14px 12px 10px; border-radius: 16px; background: var(--bubble-bg); color: var(--bubble-color); box-shadow: var(--bubble-shadow); font-size: 13px; }
+#feed-panel.hidden, #feed-panel.quiet-hidden { display: none; }
+#feed-close { position: absolute; right: 5px; top: 5px; border: 0; color: inherit; background: transparent; cursor: pointer; font-size: 20px; }
+#mood-score { font-size: 11px; opacity: .8; margin-top: 8px; }
+.mood-meter { height: 5px; background: rgba(125,155,200,.18); border-radius: 4px; margin: 5px 0 10px; overflow: hidden; }
+#mood-fill { height: 100%; width: 65%; background: #7cafff; transition: width .25s; }
+#food-options { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
+#food-options button { padding: 8px 2px; border: 1px solid rgba(125,155,200,.2); border-radius: 10px; color: inherit; background: rgba(125,155,200,.1); cursor: pointer; font: inherit; font-size: 10px; }
+#food-options button:hover { background: rgba(125,155,200,.24); }
+#food-options button:disabled { opacity: .6; }
+.food-icon { display: block; font-size: 24px; margin-bottom: 5px; }
+#feed-note { font-size: 11px; opacity: .75; margin: 9px 0 0; }
+#pet-effects { position: absolute; z-index: 11; pointer-events: none; }
+#pose-ledge { position: absolute; height: 3px; border-radius: 3px; background: #c5dcf2; box-shadow: 0 2px 3px rgba(50,75,110,.2); pointer-events: none; }
+#pose-ledge.hidden { display: none; }
+.particle { position: absolute; font-size: 22px; font-weight: bold; animation: pet-float 1.9s var(--delay) ease-out infinite; opacity: 0; left: var(--offset); }
+.particle.hearts { color: #ff83ac; }
+.particle.stars { color: #ffcf75; }
+.particle.zzz { color: #91baff; font-size: 18px; }
+.particle.laugh { color: #7cc9d8; }
+@keyframes pet-float { 0% { opacity: 0; transform: translateY(4px) scale(.7) rotate(-8deg); } 20% { opacity: .95; } 100% { opacity: 0; transform: translateY(-60px) scale(1.15) rotate(12deg); } }
+
+#bubble {
+  position: absolute;
+  left: 50%;
+  bottom: calc(var(--pet-height, 128px) + 10px);
+  max-height: 200px;
+  overflow: visible;
+  transform: translateX(-50%);
+  min-width: 96px;
+  max-width: var(--bubble-max-width);
+  padding: 10px 27px 10px 12px;
+  border-radius: var(--bubble-radius);
+  background: var(--bubble-bg);
+  color: var(--bubble-color);
+  font-size: var(--bubble-size);
+  line-height: 1.5;
+  box-shadow: var(--bubble-shadow);
+  backdrop-filter: blur(6px);
+  word-break: break-word;
+  white-space: normal;
+  transition: opacity 0.12s ease;
+}
+
+#bubble::after {
+  content: none;
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  background: var(--bubble-bg);
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+
+#bubble.hidden, #bubble.drag-hidden, #bubble.quiet-hidden {
+  display: none;
+}
+
+#bubble-text:empty { display: none; }
+#bubble-text { white-space: pre-wrap; max-height: 120px; overflow-y: auto; user-select: text; scrollbar-width: thin; }
+#bubble.editing { min-width: min(240px, calc(100vw - 24px)); }
+#bubble-close { position: absolute; right: 4px; top: 4px; width: 22px; height: 22px; border: 0; border-radius: 6px; background: transparent; color: inherit; opacity: .55; cursor: pointer; font: inherit; }
+#bubble-close:hover { opacity: 1; background: rgba(120, 140, 180, .12); }
+
+#bubble-text.streaming::after {
+  content: "▌";
+  margin-left: 1px;
+  color: var(--accent);
+  animation: caret 0.9s steps(1) infinite;
+}
+
+@keyframes caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+#bubble-hint {
+  margin-top: 4px;
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+#bubble-hint:empty {
+  display: none;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.chips.hidden {
+  display: none;
+}
+
+.chip {
+  padding: 3px 9px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 12px;
+  cursor: pointer;
+  background: transparent;
+}
+
+.chip:hover {
+  background: var(--accent);
+  color: #10131a;
+}
+
+#bubble-input-row {
+  margin-top: 8px;
+}
+
+#bubble-input-row.hidden {
+  display: none;
+}
+
+#chat-input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  background: rgba(120, 140, 180, 0.08);
+  color: inherit;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+}
+
+#chat-input:focus {
+  border-color: var(--accent);
+}

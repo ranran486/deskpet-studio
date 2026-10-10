@@ -1,0 +1,47 @@
+{
+  "manifestVersion": 1,
+  "id": "builtin.pomodoro-js",
+  "name": "番茄钟（代码插件示例）",
+  "version": "0.1.0",
+  "description": "演示 JS 代码插件：handle / registerCommand / timer / storage / say / react，以及权限被拒时的行为。",
+  "author": "deskpet",
+  "icon": "timer",
+  "kind": "behavior",
+  "runtime": "javascript",
+  "engine": {
+    "deskpet": ">=0.1.0 <1.0.0"
+  },
+  "sdkVersion": "0.1.0",
+  "entry": "index.js",
+  "permissions": ["pet:speak", "pet:react", "timer", "storage", "command"],
+  "configSchema": {
+    "focusMinutes": {
+      "type": "number",
+      "label": "默认番茄长度（分钟）",
+      "default": 25
+    },
+    "greet": {
+      "type": "boolean",
+      "label": "启动时打招呼",
+      "default": true
+    }
+  },
+  "triggers": [
+    {
+      "id": "greet-on-startup",
+      "when": { "on": "startup", "once": true },
+      "actions": [
+        { "type": "pet.react", "reaction": "wave" },
+        { "type": "run", "handler": "stats" }
+      ]
+    },
+    {
+      "id": "hourly-stand-up",
+      "when": { "on": "timer", "everyMinutes": 60 },
+      "actions": [
+        { "type": "pet.speak", "message": "已经坐了一小时啦，站起来伸个懒腰～", "durationMs": 5000 },
+        { "type": "pet.react", "reaction": "happy" }
+      ]
+    }
+  ]
+}

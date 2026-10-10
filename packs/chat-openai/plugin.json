@@ -1,0 +1,49 @@
+{
+  "manifestVersion": 1,
+  "id": "builtin.chat-openai",
+  "name": "DeepSeek · 云端 API",
+  "version": "0.1.0",
+  "description": "任何 OpenAI 兼容接口（DeepSeek / 通义 / vLLM / LM Studio / OpenRouter…）：SSE 流式，需要 API key。",
+  "author": "deskpet",
+  "icon": "cloud",
+  "kind": "chat",
+  "runtime": "data",
+  "engine": {
+    "deskpet": ">=0.1.0 <1.0.0"
+  },
+  "configSchema": {
+    "baseUrl": {
+      "type": "text",
+      "label": "Base URL",
+      "default": "https://api.deepseek.com",
+      "description": "会自动拼 /chat/completions；换别家只改这一行"
+    },
+    "model": {
+      "type": "select",
+      "label": "模型名",
+      "options": [{ "label": "DeepSeek Flash（日常对话）", "value": "deepseek-flash" }, { "label": "DeepSeek V4 Pro", "value": "deepseek-v4-pro" }],
+      "default": "deepseek-flash"
+    },
+    "persona": {
+      "type": "textarea",
+      "label": "自定义性格与说话方式",
+      "description": "填写性格、称呼和说话习惯，可随时修改；保存后下一轮对话生效",
+      "default": "你是住在用户电脑桌面的动漫美少女伙伴，温柔自然，说话简短、口语化，愿意陪用户工作与休息。回复与当前角色互动相协调。"
+    },
+    "animateReply": {
+      "type": "boolean", "label": "回复时自动表情与小动作", "default": true,
+      "description": "只允许表情和短动作，不让模型移动窗口或执行系统命令"
+    }
+  },
+  "data": {
+    "chat": {
+      "type": "openai-compatible",
+      "baseUrl": { "config": "baseUrl" },
+      "model": { "config": "model" },
+      "systemPrompt": { "config": "persona" },
+      "temperature": 0.8,
+      "apiKeyRef": "builtin.chat-openai",
+      "requiresApiKey": true
+    }
+  }
+}

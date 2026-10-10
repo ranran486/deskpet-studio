@@ -1,0 +1,402 @@
+{
+  "default": "idle",
+  "drag": "drag-lift",
+  "talk": "talk",
+  "states": {
+    "idle": {
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "front"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ],
+      "action": "idle"
+    },
+    "front": {
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "front"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ],
+      "action": "idle"
+    },
+    "side": {
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "side"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ],
+      "action": "idle"
+    },
+    "back": {
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "back"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ],
+      "action": "idle"
+    },
+    "walk": {
+      "action": "walk",
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "walk_0",
+            "walk_1",
+            "walk_2",
+            "walk_3"
+          ],
+          "fps": 5,
+          "loop": true
+        }
+      ]
+    },
+    "sleep-curl": {
+      "action": "sleep-curl",
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "sleep-curl_0",
+            "sleep-curl_1",
+            "sleep-curl_2",
+            "sleep-curl_3"
+          ],
+          "fps": 1.1,
+          "loop": true
+        }
+      ]
+    },
+    "sleep": {
+      "action": "sleep-curl",
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "sleep-curl_0",
+            "sleep-curl_1",
+            "sleep-curl_2",
+            "sleep-curl_3"
+          ],
+          "fps": 1.1,
+          "loop": true
+        }
+      ]
+    },
+    "peek-left": {
+      "action": "peek-left",
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "peek_0",
+            "peek_0",
+            "peek_0",
+            "peek_1",
+            "peek_2",
+            "peek_3"
+          ],
+          "fps": 1.3,
+          "loop": true
+        }
+      ]
+    },
+    "peek-right": {
+      "action": "peek-right",
+      "mirror": true,
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "peek_0",
+            "peek_0",
+            "peek_0",
+            "peek_1",
+            "peek_2",
+            "peek_3"
+          ],
+          "fps": 1.3,
+          "loop": true
+        }
+      ]
+    },
+    "drag-lift": {
+      "action": "drag-lift",
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "pose-struggle-0",
+            "pose-struggle-1",
+            "pose-struggle-2",
+            "pose-struggle-3"
+          ],
+          "fps": 6,
+          "loop": true
+        }
+      ]
+    },
+    "drag": {
+      "action": "drag-lift",
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "pose-struggle-0",
+            "pose-struggle-1",
+            "pose-struggle-2",
+            "pose-struggle-3"
+          ],
+          "fps": 6,
+          "loop": true
+        }
+      ]
+    },
+    "talk": {
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "front"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ],
+      "action": "idle",
+      "motion": {
+        "preset": "bounce",
+        "periodMs": 700,
+        "strength": 0.25
+      }
+    },
+    "wave": {
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "happy"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ],
+      "action": "idle",
+      "emotion": "happy",
+      "motion": {
+        "preset": "sway",
+        "periodMs": 1200
+      }
+    },
+    "happy": {
+      "action": "idle",
+      "emotion": "happy",
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "face-happy"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ]
+    },
+    "angry": {
+      "action": "idle",
+      "emotion": "angry",
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "face-angry"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ]
+    },
+    "sad": {
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "sad"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ],
+      "action": "idle",
+      "emotion": "sad"
+    },
+    "neutral": {
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "neutral"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ],
+      "action": "idle",
+      "emotion": "neutral"
+    },
+    "purr": {
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "happy"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ],
+      "action": "idle",
+      "emotion": "happy",
+      "motion": {
+        "preset": "sway",
+        "periodMs": 2400,
+        "strength": 0.3
+      }
+    },
+    "shy": {
+      "action": "idle",
+      "emotion": "shy",
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "face-shy"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ]
+    },
+    "surprised": {
+      "action": "idle",
+      "emotion": "surprised",
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "face-surprised"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ]
+    },
+    "sleepy": {
+      "action": "idle",
+      "emotion": "sleepy",
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "face-sleepy"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ]
+    },
+    "dizzy": {
+      "action": "idle",
+      "emotion": "dizzy",
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "face-dizzy"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ]
+    },
+    "love": {
+      "action": "idle",
+      "emotion": "love",
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "face-love"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ]
+    },
+    "unimpressed": {
+      "action": "idle",
+      "emotion": "unimpressed",
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "face-unimpressed"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ]
+    },
+    "lounge-bottom": {
+      "action": "lounge-bottom",
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "pose-lounge-bottom"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ]
+    },
+    "hang-top": {
+      "action": "hang-top",
+      "loop": true,
+      "motion": {
+        "preset": "sway",
+        "strength": 0.2,
+        "periodMs": 2200
+      },
+      "clips": [
+        {
+          "frames": [
+            "pose-hang-top"
+          ],
+          "fps": 1,
+          "loop": true
+        }
+      ]
+    }
+  }
+}

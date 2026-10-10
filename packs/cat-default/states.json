@@ -1,0 +1,127 @@
+{
+  "default": "idle",
+  "drag": "drag",
+  "talk": "talk",
+  "states": {
+    "idle": {
+      "fps": 6,
+      "loop": true,
+      "idle": true,
+      "clips": [
+        {
+          "frames": [
+            "idle_0",
+            "idle_1",
+            "idle_2",
+            "idle_3"
+          ],
+          "weight": 3,
+          "fps": 6,
+          "loop": true
+        },
+        {
+          "frames": [
+            "idle_look_0",
+            "idle_look_1",
+            "idle_look_2",
+            "idle_look_3"
+          ],
+          "weight": 2,
+          "fps": 5,
+          "loop": true
+        },
+        {
+          "frames": [
+            "idle_tail_0",
+            "idle_tail_1",
+            "idle_tail_2",
+            "idle_tail_3"
+          ],
+          "weight": 1,
+          "fps": 7,
+          "loop": true
+        }
+      ]
+    },
+    "wave": {
+      "fps": 8,
+      "loop": false,
+      "next": "idle",
+      "clips": [
+        {
+          "frames": [
+            "wave_0",
+            "wave_1",
+            "wave_2",
+            "wave_3"
+          ],
+          "weight": 1,
+          "fps": 8,
+          "loop": false
+        }
+      ]
+    },
+    "talk": {
+      "fps": 5,
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "talk_0",
+            "talk_1"
+          ],
+          "weight": 1,
+          "fps": 5,
+          "loop": true
+        }
+      ]
+    },
+    "drag": {
+      "fps": 4,
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "drag_0",
+            "drag_1"
+          ],
+          "weight": 1,
+          "fps": 4,
+          "loop": true
+        }
+      ]
+    },
+    "happy": {
+      "fps": 7,
+      "loop": false,
+      "next": "idle",
+      "clips": [
+        {
+          "frames": [
+            "happy_0",
+            "happy_1",
+            "happy_2"
+          ],
+          "weight": 1,
+          "fps": 7,
+          "loop": false
+        }
+      ]
+    },
+    "sleep": {
+      "fps": 2,
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "sleep_0",
+            "sleep_1"
+          ],
+          "weight": 1,
+          "fps": 2,
+          "loop": true
+        }
+      ]
+    }
+  }
+}

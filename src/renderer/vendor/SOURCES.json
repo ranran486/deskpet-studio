@@ -1,0 +1,23 @@
+{
+  "recordedAt": "2026-10-09T09:20:44.043Z",
+  "files": [
+    {
+      "file": "src/renderer/vendor/cubism4.min.js",
+      "version": "0.4.0",
+      "source": "https://www.npmjs.com/package/pixi-live2d-display/v/0.4.0",
+      "repository": "https://github.com/guansss/pixi-live2d-display",
+      "license": "LICENSES/pixi-live2d-display-MIT.txt",
+      "sha256": "af1267e6d52759b245766c578d905bfa025b532d5c3cc727c370957c4409e21b"
+    }
+  ],
+  "npmDependencies": {
+    "pixi.js": "6.5.10",
+    "@pixi/unsafe-eval": "6.5.10"
+  },
+  "optionalCore": {
+    "source": "https://cubism.live2d.com/sdk-web/core/05/live2dcubismcore.min.js",
+    "includedInRepository": false,
+    "setup": "npm run setup:live2d -- --accept-live2d-license",
+    "terms": "https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_en.html"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "manifestVersion": 1,
+  "id": "builtin.chat-ollama",
+  "name": "本地 Ollama",
+  "version": "0.1.0",
+  "description": "本地大模型后端：http://127.0.0.1:11434，NDJSON 流式，不需要 API key，聊天内容不出本机。",
+  "author": "deskpet",
+  "icon": "ollama",
+  "kind": "chat",
+  "runtime": "data",
+  "engine": {
+    "deskpet": ">=0.1.0 <1.0.0"
+  },
+  "configSchema": {
+    "baseUrl": {
+      "type": "text",
+      "label": "服务地址",
+      "default": "http://127.0.0.1:11434",
+      "description": "Ollama 默认监听 127.0.0.1:11434；改端口时同步改这里"
+    },
+    "model": {
+      "type": "text",
+      "label": "模型名",
+      "default": "qwen2.5:7b",
+      "description": "用 `ollama list` 看本机已拉取的模型，填这里即可切换"
+    },
+    "persona": {
+      "type": "textarea",
+      "label": "角色设定（system prompt）",
+      "default": "你叫蓝鲸，是住在用户电脑桌面上的蓝发女仆伙伴。温柔自然，说话简短、口语化，偶尔用颜文字，每次回复不超过两句。会被拖动和摸头，愿意陪用户工作与休息。"
+    }
+  },
+  "data": {
+    "chat": {
+      "type": "ollama",
+      "baseUrl": { "config": "baseUrl" },
+      "model": { "config": "model" },
+      "systemPrompt": { "config": "persona" },
+      "temperature": 0.8,
+      "requiresApiKey": false
+    }
+  }
+}

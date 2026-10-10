@@ -1,0 +1,38 @@
+{
+  "version": "deskpet-character-actions/1",
+  "kind": "sprite",
+  "states": {
+    "idle": "idle",
+    "walk": "walk",
+    "sleep-curl": "sleep-curl",
+    "peek-left": "peek-left",
+    "peek-right": "peek-right",
+    "lounge-bottom": "lounge-bottom",
+    "hang-top": "hang-top",
+    "drag-lift": "drag-lift",
+    "shy": "shy",
+    "happy": "happy",
+    "surprised": "surprised",
+    "angry": "angry",
+    "sleepy": "sleepy",
+    "dizzy": "dizzy",
+    "love": "love",
+    "unimpressed": "unimpressed",
+    "neutral": "neutral",
+    "sad": "sad",
+    "talk": "talk",
+    "wave": "wave"
+  },
+  "anchors": {
+    "collar": {
+      "x": 0.5,
+      "y": 0.0625
+    },
+    "hangY": 0.06,
+    "loungeY": 0.78,
+    "peek": {
+      "left": 0.4,
+      "right": 0.6
+    }
+  }
+}

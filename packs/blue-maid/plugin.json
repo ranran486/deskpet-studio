@@ -1,0 +1,55 @@
+{
+  "manifestVersion": 1,
+  "id": "builtin.blue-maid",
+  "name": "蓝鲸 · 蓝发女仆",
+  "version": "0.3.0",
+  "description": "蓝鲸：八种表情、摸头喂食与心情互动、底边趴桌沿、顶边倒挂、衣领悬空挣扎及旧版动作。",
+  "author": "deskpet · user reference + imagegen",
+  "kind": "skin",
+  "runtime": "data",
+  "engine": {
+    "deskpet": ">=0.1.0 <1.0.0"
+  },
+  "icon": "preview-front.png",
+  "scale": 0.4,
+  "anchor": {
+    "x": 0.5,
+    "y": 1
+  },
+  "data": {
+    "spritesheet": "spritesheet.png",
+    "atlas": "atlas.json",
+    "states": "states.json",
+    "actionProfile": "action-profile.json"
+  },
+  "provides": {
+    "states": [
+      "idle",
+      "front",
+      "side",
+      "back",
+      "walk",
+      "sleep-curl",
+      "sleep",
+      "peek-left",
+      "peek-right",
+      "drag-lift",
+      "drag",
+      "talk",
+      "wave",
+      "happy",
+      "angry",
+      "sad",
+      "neutral",
+      "purr",
+      "shy",
+      "surprised",
+      "sleepy",
+      "dizzy",
+      "love",
+      "unimpressed",
+      "lounge-bottom",
+      "hang-top"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+name: Bug report
+description: Report unexpected desktop pet behavior
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Version and Windows version
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps, expected behavior and actual behavior
+      description: Include display scaling and model type when relevant. Do not include API keys or private chats.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshots or sanitized logs

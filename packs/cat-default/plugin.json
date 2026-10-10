@@ -1,0 +1,33 @@
+{
+  "manifestVersion": 1,
+  "id": "builtin.cat-default",
+  "name": "橘猫 · 默认外形",
+  "version": "0.1.0",
+  "description": "内置默认皮肤：一只圆润的橘猫，含待机（呼吸 / 张望 / 甩尾）、挥手、说话、被拖动、开心、睡觉 8 个动作状态。纯数据包，全部素材由 tools/make-default-skin.py 生成。",
+  "author": "deskpet",
+  "icon": "preview-idle.png",
+  "kind": "skin",
+  "runtime": "data",
+  "engine": {
+    "deskpet": ">=0.1.0 <1.0.0"
+  },
+  "data": {
+    "spritesheet": "spritesheet.png",
+    "atlas": "atlas.json",
+    "states": "states.json",
+    "actionProfile": "action-profile.json"
+  },
+  "provides": {
+    "skins": [
+      "cat-default"
+    ],
+    "states": [
+      "idle",
+      "wave",
+      "talk",
+      "drag",
+      "happy",
+      "sleep"
+    ]
+  }
+}

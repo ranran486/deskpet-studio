@@ -1,0 +1,18 @@
+{
+  "tool": "built-in image_gen",
+  "reference": "packs/blue-maid/preview-front.png",
+  "poses": [
+    {
+      "name": "lounge-bottom",
+      "prompt": "Use case: identity-preserve. Asset type: transparent desktop pet pose sprite. Reference image: the original Blue Whale blue-haired chibi maid, style and identity reference. Preserve her blue-to-cyan long hair, blue eyes, lace maid headband, cyan bows, navy maid dress, white apron with blue whale emblem, chibi proportions and exactly the same clean outlined softly shaded anime illustration style. Wholesome playful desktop pet, full body visible, actual transparent alpha, generous padding. No writing, labels, scenery, floor, shadows, extra characters or external hands. Create ONE full-body sprite of her leaning forward and resting her chin on both hands, elbows together on an invisible desktop ledge, soft half-lidded daydreaming face. Her legs are tucked beneath her in a comfortable compact crouch, little shoes still visible; long hair spills neatly to both sides. A cute lounging pose entirely above the screen's bottom ground. Do not draw the table itself, it will be supplied by the app."
+    },
+    {
+      "name": "hang-top",
+      "prompt": "Use case: identity-preserve. Asset type: transparent desktop pet pose sprite. Reference image: the original Blue Whale blue-haired chibi maid, style and identity reference. Preserve her blue-to-cyan long hair, blue eyes, lace maid headband, cyan bows, navy maid dress, white apron with blue whale emblem, chibi proportions and exactly the same clean outlined softly shaded anime illustration style. Wholesome playful desktop pet, full body visible, actual transparent alpha, generous padding. No writing, labels, scenery, floor, shadows, extra characters or external hands. Create ONE full-body sprite of her upside down in a playful inverted hanging pose. Both little legs/ankles are hooked over an invisible upper ledge (not drawn), feet uppermost, head at the bottom. Arms hang naturally down towards her head. Long blue hair follows gravity towards the bottom. Clothing stays secured and modest, apron whale symbol visible, no exposed undergarments or fanservice. Face looks adorably surprised and slightly dizzy, not distressed. Keep anatomically coherent knees, limbs and gravity."
+    },
+    {
+      "name": "struggle",
+      "prompt": "Use case: precise-object-edit. Edit target image 1: the generated 2x2 collar-struggle sprite sheet. Image 2: original character identity reference. Correct ONLY the suspension/grip anatomy in all four frames: she must be lifted by a visibly stretched WHITE AND NAVY BACK DRESS COLLAR FABRIC TAB connected to the nape/back of her dress, NOT by her hair or ahoge. The raised fabric tab extends above and behind the large head at the fixed upper-middle grip point. Her blue hair loop remains its normal loose shape and does not serve as a rope or contact the grip. Tip the head naturally downward in front of the lifted collar so the cloth's rear-neck connection is clear. Keep the same character, palette, 2x2 layout, four distinct leg-kicking phases, dangling/flailing arms, scale and anchor alignment. Cute complaining open mouth, no injury, modest secured clothing. Actual transparent alpha, no writing, hands, grid, background, extra characters, or shadow. Maintain the original chibi maid illustration style and whale apron."
+    }
+  ]
+}

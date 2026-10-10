@@ -1,0 +1,38 @@
+node_modules/
+dist/
+release/
+.runtime/
+*.log
+
+# Local configuration, plugins, credentials and tooling context
+.env
+.env.*
+!.env.example
+/plugins/*
+!/plugins/README.md
+/AGENTS.md
+.codex/
+.agents/
+.aws/
+*.pem
+*.key
+*.pfx
+*.p12
+
+# Optional proprietary runtime and sample model (install locally after consent)
+/src/renderer/vendor/live2dcubismcore.min.js
+/packs/hiyori-live2d/
+/LICENSES/Live2D-*-EULA.html
+
+# Generated templates, historical local reports and caches
+/templates/actions-v1/
+/docs/*-REVIEW.md
+/docs/RELEASE-*.md
+/docs/LEGACY-STAGING-NOTES.md
+/docs/action-preview-v1/*-preview.png
+/docs/action-preview-v1/*-sheet.png
+/docs/action-preview-v1/sleep-study-v1.png
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db

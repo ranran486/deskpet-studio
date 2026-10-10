@@ -1,0 +1,55 @@
+{
+  "states": {
+    "talk": {
+      "fps": 7,
+      "loop": true,
+      "clips": [
+        {
+          "frames": [
+            "talk_0",
+            "talk_1"
+          ],
+          "weight": 3,
+          "fps": 7,
+          "loop": true
+        },
+        {
+          "frames": [
+            "talk_0",
+            "talk_1",
+            "idle_0",
+            "talk_1"
+          ],
+          "weight": 1,
+          "fps": 6,
+          "loop": true
+        }
+      ]
+    },
+    "purr": {
+      "fps": 3,
+      "loop": true,
+      "idle": true,
+      "clips": [
+        {
+          "frames": [
+            "happy_0",
+            "happy_2"
+          ],
+          "weight": 2,
+          "fps": 3,
+          "loop": true
+        },
+        {
+          "frames": [
+            "idle_0",
+            "idle_1"
+          ],
+          "weight": 1,
+          "fps": 3,
+          "loop": true
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src deskpet:; style-src 'unsafe-inline' deskpet:; img-src deskpet: data:; connect-src deskpet:; font-src deskpet:"
+    />
+    <title>桌面宠物 · 设置中心</title>
+    <link rel="stylesheet" href="./settings.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="side">
+        <div class="brand">
+          <img src="deskpet://pack/builtin.cat-default/preview-idle.png" alt="DeskPet" />
+          <div>
+            <strong>桌面宠物</strong>
+            <span id="version">…</span>
+          </div>
+        </div>
+        <nav id="tabs">
+          <button class="tab" data-tab="model">外形与模型</button>
+          <button class="tab" data-tab="chat">聊天与人格</button>
+          <button class="tab" data-tab="interaction">互动</button>
+          <button class="tab" data-tab="dialogue">动作与互动语言</button>
+          <button class="tab" data-tab="plugins">插件</button>
+          <button class="tab" data-tab="about">关于</button>
+        </nav>
+        <div class="side-foot">
+          <button id="open-data" class="link">打开数据目录</button>
+          <button id="open-plugins" class="link">打开插件目录</button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <!-- 外形与模型 -->
+        <section class="page" data-page="model">
+          <h1>外形与模型</h1>
+          <p class="lead">选择角色、预览动作，或导入自己的分层 PSD、帧序列与精灵图。</p>
+          <div id="skin-current" class="card"></div>
+          <h2>模型库</h2>
+          <div id="skin-list" class="grid"></div>
+          <div id="model-import-tools" class="card">加载中…</div>
+          <p class="hint" id="live2d-note"></p>
+        </section>
+
+        <!-- 聊天与人格 -->
+        <section class="page" data-page="chat">
+          <h1>聊天与人格</h1>
+          <p class="lead">填自己的接口就能对话。Key 只写在本机配置文件里，不会进插件包、也不会出现在这个界面的明文里。</p>
+          <div class="row">
+            <label for="provider-select">后端</label>
+            <select id="provider-select"></select>
+            <button id="provider-test" class="btn">测试连接</button>
+            <span id="provider-status" class="status"></span>
+          </div>
+          <div id="provider-form" class="card"></div>
+          <div class="card"><strong>离线也能陪你玩</strong><p class="hint">未配置 Key 时自动使用本地文案；右键「离线闲聊」可主动选择。摸头、投喂、心情和姿势都不消耗 API。在「动作与互动语言」中修改台词，保存即生效。</p></div>
+          <div class="row">
+            <label for="default-provider">默认后端</label>
+            <select id="default-provider"></select>
+            <button id="provider-default-save" class="btn">设为默认</button>
+          </div>
+          <p class="hint">
+            每个后端插件的字段来自它自己的 <code>configSchema</code>，所以以后你写新的聊天插件，这里会自动出现对应表单。
+          </p>
+        </section>
+
+        <!-- 互动 -->
+        <section class="page" data-page="interaction">
+          <h1>互动</h1>
+          <p class="lead">摸头、视线跟随、闲逛漫游、躲避鼠标、待机模式的开关与参数。改完即时生效，不用重启。</p>
+          <div id="interaction-form" class="card">加载中…</div>
+        </section>
+
+        <section class="page" data-page="dialogue">
+          <h1>动作与互动语言</h1>
+          <p class="lead">所有人物共用一套本地台词。按动作、玩法和聊天话题编辑，保存后立即生效。</p>
+          <div class="card" id="dialogue-editor">加载中…</div>
+          <p class="hint">预览不会保存。填入默认只修改当前草稿；可以先编辑多个分组，再保存全部修改。云端 AI 的回复和性格仍在「聊天与人格」中设置。</p>
+        </section>
+
+        <!-- 插件 -->
+        <section class="page" data-page="plugins">
+          <h1>插件</h1>
+          <p class="lead">随框架分发的内置插件、你自己放进 <code>plugins/</code> 的插件，以及运行期热装的插件。</p>
+          <div class="row">
+            <button id="plugin-reload" class="btn">重新加载全部</button>
+            <span id="plugin-status" class="status"></span>
+          </div>
+          <div id="plugin-list" class="list"></div>
+        </section>
+
+        <!-- 关于 -->
+        <section class="page" data-page="about">
+          <h1>关于</h1>
+          <div id="about-diag" class="card"></div>
+          <h2>致谢</h2>
+          <div class="card">
+            <p>
+              交互与模型管线的设计参考了
+              <b>Petra</b>（作者 Wumiu，MIT 许可）—— 分层 PSD 转 2.5D 角色、视线跟随、摸头、
+              漫游与躲避鼠标这些做法都来自该项目。本项目按不同技术栈重新实现，并保留其署名。
+            </p>
+            <p id="live2d-about">Live2D 渲染复用 pixi-live2d-display 与 PixiJS；日和形象和 Cubism Core 来自 Live2D 官方。本机开发测试已获用户同意，公开发布另行核对许可。</p>
+            <p class="hint" id="live2d-about-binding">可导入完整 model3.json 模型目录。视线、情绪与口型按模型参数继承；完整蜷缩、提衣领等全身姿态需要模型自身绑定对应动作。</p>
+          </div>
+          <h2>快捷键与操作</h2>
+          <div class="card">
+            <ul>
+              <li>双击宠物：打开五种点心的喂食面板；右键菜单可聊天或离线闲聊</li>
+              <li>按住头顶轻抚：害羞冒爱心；轻点身体下部：咯咯笑</li>
+              <li>右键宠物：命令菜单（设置、打开数据目录、重新加载插件、退出）</li>
+              <li>左键拖动宠物：移动，松手记住位置</li>
+            </ul>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="./settings.js"></script>
+  </body>
+</html>
